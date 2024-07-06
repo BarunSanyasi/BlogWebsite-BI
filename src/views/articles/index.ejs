@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <title>Blog Website</title>
+
+    <style>
+        body {
+            margin: 40px;
+            background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(176, 229, 208, 1) 42%, rgba(92, 202, 238, 0.41) 93.6%);
+        }
+
+        h1 {
+            text-align: center;
+            margin: 10px;
+        }
+        p{
+            margin: 10px;
+            text-align: justify;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .form-group input {
+            background-color: rgba(255, 255, 255, 0.45);
+            margin-bottom: 10px;
+        }
+
+        .form-group textarea {
+            background-color: rgba(255, 255, 255, 0.45);
+            margin-bottom: 10px;
+        }
+
+        .form-group label{
+            font-style: italic;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.45);
+            padding: 10px;
+            border-radius: 15px;
+        }
+
+        .card-title {
+            padding: 10px 0;
+        }
+
+        .btn {
+            margin: 5px 10px;
+        }
+        .card-body a{
+            margin: 5px 0;
+        }
+        .card-body button{
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mb-4">Personal Blog Website</h1>
+        <p class="mb-4">Welcome to my personal blog website! This space is dedicated to sharing thoughts,
+            ideas, and experiences on various topics that I am passionate about. Whether you're here to read,
+            explore, or engage in meaningful conversations, I hope you find the content insightful and inspiring.
+            Feel free to browse through the different sections, and don't hesitate to leave your comments and feedback.
+            Your participation is what makes this blog a vibrant community of curious minds.</p>
+            
+        <p class="mb-4">I warmly invite you to contribute by writing and posting your own blogs. This platform is not just about
+            my voice, but about creating a diverse and inclusive environment where everyone can share their unique
+            perspectives.
+            Whether you're an experienced writer or a newcomer, your stories and insights are valuable here. So, take a
+            moment
+            to pen down your thoughts, share your experiences, and let's build a rich tapestry of ideas together.
+            Welcome once again,
+            and happy blogging!</p>
+        <a href="/articles/new" class="btn btn-success">Create Article</a>
+
+        <% articles.forEach(article=>{%>
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <%=article.title%>
+                    </h4>
+                    <div class="card-subtitle text-muted mb-2">
+                        <%=article.createdAt.toLocaleDateString() %>
+                    </div>
+                    <div class="card-text mb-2">
+                        <%=article.description%>
+                    </div>
+                    <a href="articles/<%=article.slug%>" class="btn btn-primary">Read More</a>
+                    <a href="articles/edit/<%= article.id%>" class="btn btn-info">Edit</a>
+                    <form action="/articles/<%=article.id %>?_method=DELETE" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+
+            <%})%>
+    </div>
+</body>
+
+</html>
